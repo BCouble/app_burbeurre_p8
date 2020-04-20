@@ -1,27 +1,26 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+
+from .models import CustomUser
 
 
 class SearchProductForm(forms.Form):
     """ recherche dans l'openfood et dans les aliment sauvegardé """
-    pass
-    """ 
-    search_text = forms.CharField(
-        label="alimentà substituer ",
-        max_length=100
-    )
-    """
+    search_text = forms.CharField(max_length=100, required=True)
 
 
-class CreateUserForm(forms.Form):
-    """ create user for purbeurre platform """
-    pass
-    """
-    first_name(user django)
-    last_name(user django)
-    email(user django)
-    img_choix (background vue profil)
-    genre (CheckboxInput : homme ou femme)
-    """
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta(UserCreationForm.Meta):
+        model = CustomUser
+        fields = UserCreationForm.Meta.fields
+
+
+class CustomUserChangeForm(UserChangeForm):
+    class Meta:
+        model = CustomUser
+        fields = UserChangeForm.Meta.fields
 
 
 class ConnexionForm(forms.Form):

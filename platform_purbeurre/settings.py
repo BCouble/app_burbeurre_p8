@@ -55,7 +55,10 @@ ROOT_URLCONF = 'platform_purbeurre.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates")],
+        'DIRS': [
+            os.path.join(BASE_DIR, "templates"),
+            os.path.join(BASE_DIR, 'purbeurre/templates/purbeurre'),
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,3 +130,5 @@ STATIC_URL = '/static/'
 STATIC_FILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+AUTH_USER_MODEL = 'purbeurre.CustomUser'

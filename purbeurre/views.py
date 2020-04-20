@@ -1,15 +1,44 @@
+from django.http import HttpResponse
+from django.template import loader
+from django.urls import reverse_lazy
 from django.views import generic
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+
+from .forms import SearchProductForm, CustomUserCreationForm
 from .models import Message
 
 
+def index(request):
+    search_form = SearchProductForm()
+
+    return render(request, 'purbeurre/index.html', locals())
+
+
+def signup(request):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'signup.html'
+
+
+def productSearch(request):
+    search_form = SearchProductForm()
+    if search_form.is_valid():
+        search = search_form.cleaned_data['search']
+        envoi = True
+
+    return render(request, 'purbeurre/test.html', locals())
+
+
+"""
 class IndexView(generic.ListView):
     template_name = 'purbeurre/index.html'
 
     def homePage(self):
-        """ home page """
-        """ Welcome in purbeurre, et vive le gras ! """
+        home page 
+        Welcome in purbeurre, et vive le gras ! 
         pass
+"""
 
 
 class NavView(generic.ListView):

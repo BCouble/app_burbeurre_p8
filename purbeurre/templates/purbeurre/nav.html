@@ -1,0 +1,30 @@
+{% extends "pb_base.html" %}
+{% block menu %}
+{% load static %}
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                    <img src="{% static 'assets/img/logo_pur_beurre.png' %}" alt="logo pur beurre" width="30" height="30">
+                    Pur Beurre --- {{ user.username }}</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <!-- if connect full nav else search inscription or connect -->
+                    {% if user.is_authenticated %}
+                        <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#chercher">Chercher</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#profile">Profile</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#carotte">carotte</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact_pb</a></li>
+                        </ul>
+                    {% else %}
+                        <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#chercher">Chercher</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#profile">Inscription</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#carotte">Connexion</a></li>
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+{% endblock menu %}
