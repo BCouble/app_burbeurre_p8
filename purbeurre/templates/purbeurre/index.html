@@ -11,7 +11,7 @@
                     </div>
                     <div class="col-lg-8 align-self-baseline">
                         <p class="text-white-75 font-weight-light mb-5">Trouver un produit de substitution pour ceux que vous consomez tous les jours.</p>
-                        <form action="{% url 'test' %}" method="post">
+                        <form action="#" method="post">
                             {% csrf_token %}
                             {{ search_form.as_p }}
                             <button type="submit" value="submit" class="btn-submit-home btn btn-primary btn-xl">Chercher</button>

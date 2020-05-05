@@ -4,31 +4,31 @@ from django.test import TestCase
 
 # ========================================================
 
-# test libs
+# tests libs
 # search in off
 # compare in off
 
 # ========================================================
 
 # ???
-# ?? test integration data ???
+# ?? tests integration data ???
 # ???
 
 # ========================================================
 
-# test forms
+# tests forms
 
 # ========================================================
 
-# test view & url ::
+# tests view & url ::
 
-# test header
+# tests header
 # search header
 # user compte
 # favoris (carotte)
 # login - logout
 
-# test container
+# tests container
 # header product
 # section : présentation purbeurre
 # section : contact
@@ -38,7 +38,7 @@ from django.test import TestCase
     # list details produit deux colonnes ou une
     # list profil user ici just email
 
-# test footer
+# tests footer
     # mention legal
     # link section contact de la home page
 

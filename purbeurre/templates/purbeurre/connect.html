@@ -1,3 +1,9 @@
+{% extends "index.html" %}
+{% block header %}
+<!-- Masthead-->
+<header class="masthead">
+<div class="container h-100">
+
 <h1>Se connecter</h1>
 
 {% if error %}
@@ -13,3 +19,5 @@ Vous êtes connecté, {{ user.username }} !
     <input type="submit" value="Se connecter" />
 </form>
 {% endif %}
+
+</div></header>{% endblock %}

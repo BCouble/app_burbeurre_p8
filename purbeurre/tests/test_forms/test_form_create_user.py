@@ -1,40 +1,28 @@
-import unittest
-from django.contrib.auth import get_user_model
-from purbeurre.forms import CreateUserForm
-from purbeurre.models import Profil
+from django.test import TestCase
+from purbeurre.forms import CustomUserCreationForm
+from purbeurre.libs.constant import LABEL_PASSWORD1
 
 
-class CreateUserFormTest(unittest.TestCase):
+class CreateUserFormTest(TestCase):
     def setUp(self):
-        self.profil = Profil.objects.create(email="baba.cool@tata.com")
+        self.form = CustomUserCreationForm()
 
+    def test_form_username_field(self):
+        """ Check if form label and help text is valid for usernam """
+        self.assertEqual(self.form.fields['username'].label, 'Nom d\'utilisateur ')
+        self.assertEqual(self.form.fields['username'].help_text, 'Votre nom d\'utilisateur doit-être unique !')
 
-    def test_init(self):
-        CreateUserForm(entry=self.profil)
+    def test_form_email_field(self):
+        """ Check if form label and help text is valid for e-mail """
+        self.assertEqual(self.form.fields['email'].label, 'E-mail ')
+        self.assertEqual(self.form.fields['email'].help_text, 'Une adresse mail valide ')
 
-    def test_init_with_search_text(self):
-        with self.assertRaises(KeyError):
-            CreateUserForm()
+    def test_form_password1_field(self):
+        """ Check if form label and help text is valid for password1 """
+        self.assertEqual(self.form.fields['password1'].label, 'Votre mot de passe ')
+        self.assertEqual(self.form.fields['password1'].help_text, LABEL_PASSWORD1)
 
-    def test_valid_data(self):
-        form = CreateUserForm({
-            'first_name': "baba",
-            'last_name': "cool",
-            'pswd': "3214",
-            'valid_pswd': "3214",
-            'email': "baba.cool@tata.com",
-        })
-        self.assertTrue(form.is_valid())
-
-    def test_blank_data(self):
-        form = CreateUserForm({})
-        self.assertFalse(form.is_valid())
-        self.assertEqual(form.errors, {
-            'first_name': ['required'],
-            'last_name': ['required'],
-            'email': ['required']
-        })
-
-
-if __name__ == '__main__':
-    unittest.main()
+    def test_form_password2_field(self):
+        """ Check if form label and help text is valid for password2 """
+        self.assertEqual(self.form.fields['password2'].label, 'Comfirmez vôtre mot de passe ')
+        self.assertEqual(self.form.fields['password2'].help_text, 'Votre mot de passe doit-être identique.')

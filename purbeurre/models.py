@@ -1,8 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, UserManager
-from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+from django.contrib.auth.models import AbstractUser
 
 
 class Message(models.Model):
@@ -11,72 +8,50 @@ class Message(models.Model):
     def __str__(self):
         return self.message_txt
 
-class CustomUserManager(UserManager):
-    pass
 
 class CustomUser(AbstractUser):
-    pass
-
-"""
-class Profile(models.Model):
-     Data for user add with User Django genre and background select 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    """ Custom User for background profile and genre add """
     FEMALE = 'F'
     MALE = 'M'
     NULL = 'O'
-    GENRE_CHOICES = [
-        (FEMALE, 'femme'),
-        (MALE, 'homme'),
-        (NULL, 'non définit'),
-    ]
-    genre = models.CharField(
-        max_length=2,
-        choices=GENRE_CHOICES,
-        default=NULL,
-    )
+    GENRE_CHOICES = [(FEMALE, 'femme'), (MALE, 'homme'), (NULL, 'non définit'), ]
+    genre = models.CharField(max_length=2, choices=GENRE_CHOICES, default=NULL, )
     BG1 = '1'
     BG2 = '2'
     BG3 = '3'
-    BACKGROUND_CHOICES = [
-        (BG1, 'Rose'),
-        (BG2, 'Vert'),
-        (BG3, 'Orange'),
-    ]
-    background = models.CharField(
-        max_length=1,
-        choices=BACKGROUND_CHOICES,
-        default=BG1,
-    )"""
-
-"""
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
+    BACKGROUND_CHOICES = [(BG1, 'Rose'), (BG2, 'Vert'), (BG3, 'Orange'), ]
+    background = models.CharField(max_length=1, choices=BACKGROUND_CHOICES, default=BG1, )
 
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+class Category(models.Model):
+    """ Model catégory niv 0 off """
+    name = models.CharField(max_length=100, unique=True)
+    parent = models.ForeignKey('Category', on_delete=models.CASCADE, related_name="children", null=True)
+
+    def __str__(self):
+        return self.name
 
 
-@receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-        instance.profile.save()
-    """
-"""
-# P5 !!!
-#class ProductOpenFoodFact(models.Model):
-     Data save for favoris's user 
- #   pass
-    
-    name
-    nutriscore
-    repere nutritionnel pour 100g
-    lien page sur l'aliment openfoodfact
-    image ou lien image
-    id ou référence aliment recherché
-    user foreikey
-    """
+class FoodPurBeurre(models.Model):
+    """ Model Food of OpenFoodFact """
+    product_name_fr = models.CharField(max_length=255, unique=True)
+    generic_name_fr = models.CharField(max_length=400)
+    nutriscore = models.CharField(max_length=1)
+    nut_cent_gr = models.IntegerField()
+    store = models.CharField(max_length=200, null=True)
+    category_s1 = models.ForeignKey(Category, on_delete=models.CASCADE)
+    link_off = models.URLField(max_length=300)
+    link_img = models.URLField(max_length=300)
+
+    def __str__(self):
+        return self.product_name_fr
+
+
+class Favoris(models.Model):
+    """ Save Favoris for user """
+    search = models.CharField(max_length=150, unique=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    food = models.ForeignKey(FoodPurBeurre, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.search
