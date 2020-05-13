@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+{% block header %}
+<section class="page-section">
+
+<!-- test SearchProductsView ListView ou DetailView -->
+{% if search_foods %}
+    <div class="row">
+    {% for food in search_foods %}
+
+        <div class="col-lg-3">
+        <h5>{{ food.product_name_fr }}</h5>
+        <div class="panel-thumbnail">
+            <img src='{{ food.link_img }}' width='150px' height="150px">
+        </div>
+        <p class='nutriscore_thumb'>{{ food.nutriscore | upper }}</p>
+        <!-- Pourquoi pas category_s1 -->
+        <a href="{% url 'purbeurre:search_substitute' food.id %}">Sélectionner</a>
+
+    {% endfor %}
+    </div>
+{% else %}
+    <p>No food hahaha ;) ! même joueur joue encore...</p>
+{% endif %}
+
+</section>
+<!-- Fin insert block -->
+{% endblock %}

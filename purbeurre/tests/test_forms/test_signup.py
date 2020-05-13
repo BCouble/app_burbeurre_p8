@@ -53,4 +53,4 @@ class SignupTestForm(TestCase):
             'genre': 'O',
         }
         form = CustomUserCreationForm(data=user)
-        self.assertTrue(form.is_valid())
+        self.assertFalse(form.is_valid())

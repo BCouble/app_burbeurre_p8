@@ -20,7 +20,7 @@
                         </ul>
                     {% else %}
                         <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#" >Chercher</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'purbeurre:search_food' %}" >Chercher</a></li>
                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'purbeurre:signup' %}" >Inscription</a></li>
                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'purbeurre:connect' %}" >Connexion</a></li>
                         </ul>

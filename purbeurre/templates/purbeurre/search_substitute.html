@@ -1,0 +1,12 @@
+<p>coucou substitute</p>
+{% if search_substitute %}
+    <ul>
+        {% for food in search_substitute %}
+            <li>{{ food.product_name_fr }}</li>
+            <li><img src='{{ food.link_img }}' width='150px' height="150px"></li>
+            <li><p class='nutriscore_thumb'>{{ food.nutriscore | upper }}</p></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No food hahaha ;) ! même joueur joue encore...</p>
+{% endif %}

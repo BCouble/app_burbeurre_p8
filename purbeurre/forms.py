@@ -1,4 +1,5 @@
 from django import forms
+from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
@@ -10,6 +11,9 @@ from .models import CustomUser
 class SearchProductForm(forms.Form):
     """ recherche dans l'openfoodfact's bdd et dans les aliments sauvegardé """
     search_text = forms.CharField(max_length=100, required=True)
+
+    def get_absolute_url(self):
+        return reverse('search_foods', kwargs={'pk': self.pk})
 
 
 class CustomUserCreationForm(UserCreationForm):

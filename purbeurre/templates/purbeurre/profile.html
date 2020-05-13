@@ -1,6 +1,13 @@
-<form method="post">
-  {% csrf_token %}
-  {{ user_form.as_p }}
-  {{ profile_form.as_p }}
-  <button type="submit">Save changes</button>
-</form>
+{% if profile %}
+    <ul>
+        {% for item in profile %}
+            <li>{{ item.name }}</li>
+            <!-- bannière personnalisé avec item name ecrit dessus centré ! -->
+            <li><img src='{{ item.background }}' width='100%' height="150px"></li>
+            <!-- centrer sur la page et encadré ! cliquable ? Une vue avec LoginRequiredMixin ? -->
+            <li><a href=".">{{ item.email }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p> REDIRECTION ? </p>
+{% endif %}

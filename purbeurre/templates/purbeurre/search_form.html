@@ -1,0 +1,5 @@
+                        <form action="." method="post">
+                            {% csrf_token %}
+                            {{ search_form.as_p }}
+                            <button type="submit" value="submit" class="btn-submit-home btn btn-primary btn-xl">Chercher</button>
+                        </form>
