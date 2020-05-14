@@ -1,27 +1,28 @@
 {% extends "index.html" %}
 {% block header %}
 <section class="page-section">
-
+<div class="container">
 <!-- test SearchProductsView ListView ou DetailView -->
 {% if search_foods %}
     <div class="row">
     {% for food in search_foods %}
-
-        <div class="col-lg-3">
-        <h5>{{ food.product_name_fr }}</h5>
-        <div class="panel-thumbnail">
-            <img src='{{ food.link_img }}' width='150px' height="150px">
+        <div class="col-lg-4 col-sm-6">
+            <h6>{{ food.product_name_fr }}</h6>
+            <div class="food_img" style="background-image: url({{ food.link_img }})"></div>
+            <!-- Pourquoi pas category_s1 -->
+            <a class="btn-submit-home btn btn-primary btn-xs" href="{% url 'purbeurre:search_substitute' food.id %}">Chercher un substitut <i class="fas fa-check"></i></a>
         </div>
-        <p class='nutriscore_thumb'>{{ food.nutriscore | upper }}</p>
-        <!-- Pourquoi pas category_s1 -->
-        <a href="{% url 'purbeurre:search_substitute' food.id %}">Sélectionner</a>
+        {% if forloop.last %}
 
+        {% else %}
+            <div class="col-lg-offset-3"></div>
+        {% endif %}
     {% endfor %}
     </div>
 {% else %}
     <p>No food hahaha ;) ! même joueur joue encore...</p>
 {% endif %}
-
+</div>
 </section>
 <!-- Fin insert block -->
 {% endblock %}

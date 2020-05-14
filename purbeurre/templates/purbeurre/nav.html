@@ -2,25 +2,29 @@
 {% block menu %}
 {% load static %}
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand js-scroll-trigger" href="{% url 'purbeurre:index' %}">
                     <img src="{% static 'assets/img/logo_pur_beurre.png' %}" alt="logo pur beurre" width="30" height="30">
-                    Pur Beurre ---> Bienvenu ---> {{ user.username }}</a>
+                    Pur Beurre</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                            <li class="nav-item"><form id='search' action="{% url 'purbeurre:search_food' %}" method="get">
+                            {% for field in form %}
+                                {{ field }}
+                            {% endfor %}
+                            <button type="submit" value="submit" class="btn-submit-home btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
+                        </form>
+                            </li>
                     <!-- if connect full nav else search inscription or connect -->
                     {% if user.is_authenticated %}
-                        <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#chercher">Chercher</a></li>
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#profile">Profile</a></li>
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#carotte">carotte</a></li>
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact_pb</a></li>
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'purbeurre:user_logout' %}">Déconnexion</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'purbeurre:profile' user.id %}"><i class="far fa-user fa-2x" data-toggle="tooltip" title="Mon Profile" ></i></a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#carotte"><span class="icon icon-carotte"></span></a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact"><i class="far fa-envelope fa-2x" data-toggle="tooltip" title="Contact"></i></a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'purbeurre:user_logout' %}"><i class="fas fa-sign-out-alt fa-2x" data-toggle="tooltip" title="Déconnexion" ></i></a></li>
                         </ul>
                     {% else %}
-                        <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'purbeurre:search_food' %}" >Chercher</a></li>
                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'purbeurre:signup' %}" >Inscription</a></li>
                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'purbeurre:connect' %}" >Connexion</a></li>
                         </ul>

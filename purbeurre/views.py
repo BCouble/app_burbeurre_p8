@@ -1,15 +1,11 @@
-from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
-from django.template import loader
-from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, DetailView
-from django.views.generic.base import TemplateView, RedirectView, View
-from django.views.generic.detail import SingleObjectMixin
-from django.views.generic.edit import CreateView, FormView, FormMixin
-from django.shortcuts import render, redirect
+from django.views.generic import ListView
+from django.views.generic.base import RedirectView, View
+from django.views.generic.edit import FormView
+from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, REDIRECT_FIELD_NAME, logout as auth_logout
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
+
 from .forms import SearchProductForm, CustomUserCreationForm, CustomUserConnectForm
 from .models import CustomUser, FoodPurBeurre
 
@@ -50,6 +46,27 @@ class SearchSubstituteView(ListView):
         return FoodPurBeurre.objects.all().filter(category_s1=category[0]['category_s1_id']).order_by('nutriscore')[:6]
 
 
+class DetailsFoodView(ListView):
+    template_name = 'purbeurre/food_details.html'
+    context_object_name = 'food_details'
+
+    def get_queryset(self):
+        """ Return subsittute with best nutriscore and best energy for 100gr """
+
+        return FoodPurBeurre.objects.filter(id=self.kwargs['pk'])
+
+
+class SaveFoodView(RedirectView):
+    """ Save user's favoris """
+
+    url = '/purbeurre/favoris'
+
+    def get(self, request, *args, **kwargs):
+        auth_logout(request)
+
+        return super(SaveFoodView, self).get(request, *args, **kwargs)
+
+
 class UserCreateView(FormView):
     template_name = 'purbeurre/signup.html'
     form_class = CustomUserCreationForm
@@ -77,10 +94,15 @@ class UserConnectView(FormView):
         return super(UserConnectView, self).form_valid(form)
 
 
-class UserProfileView(LoginRequiredMixin, DetailView):
+class UserProfileView(LoginRequiredMixin, ListView):
     """ Display Profile User """
-    model = CustomUser
     template_name = 'purbeurre/profile.html'
+    context_object_name = 'profile'
+
+    def get_queryset(self):
+        """ Return détails user's profile"""
+
+        return CustomUser.objects.filter(id=self.kwargs['pk'])
 
 
 class UserLogoutView(RedirectView):
