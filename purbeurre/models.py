@@ -49,7 +49,6 @@ class FoodPurBeurre(models.Model):
 
 class Favoris(models.Model):
     """ Save Favoris for user """
-    search = models.CharField(max_length=150, unique=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     food = models.ForeignKey(FoodPurBeurre, on_delete=models.CASCADE)
 

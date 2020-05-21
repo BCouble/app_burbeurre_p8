@@ -7,7 +7,7 @@ from django.contrib.auth import login, REDIRECT_FIELD_NAME, logout as auth_logou
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
 
 from .forms import SearchProductForm, CustomUserCreationForm, CustomUserConnectForm
-from .models import CustomUser, FoodPurBeurre
+from .models import CustomUser, FoodPurBeurre, Favoris
 
 
 class IndexView(View):
@@ -31,7 +31,7 @@ class SearchProductView(ListView):
         search_vector = SearchVector('product_name_fr')
         search_query = SearchQuery(query)
         search_rank = SearchRank(search_vector, search_query)
-        return FoodPurBeurre.objects.annotate(rank=search_rank).order_by('-rank')[:6]
+        return FoodPurBeurre.objects.annotate(rank=search_rank).filter(rank__gte=0.05).order_by('-rank')[:6]
 
 
 class SearchSubstituteView(ListView):
@@ -40,10 +40,22 @@ class SearchSubstituteView(ListView):
 
     def get_queryset(self):
         """ Return subsittute with best nutriscore and best energy for 100gr """
-        id_food = self.kwargs['pk']
-        category = FoodPurBeurre.objects.all().filter(id=id_food).values()
+        category = FoodPurBeurre.objects.all().filter(id=self.kwargs['pk']).values()
 
         return FoodPurBeurre.objects.all().filter(category_s1=category[0]['category_s1_id']).order_by('nutriscore')[:6]
+
+
+class SaveFoodView(RedirectView):
+    permanent = False
+    query_string = True
+    pattern_name = 'article-detail'
+
+    def get_redirect_url(self, *args, **kwargs):
+        print(self.kwargs)
+        print(login)
+        favoris = Favoris(user=self.__setattr__('_auth_user_id'), food=self.kwargs['pk'])
+
+        return super(favoris.save()).get_redirect_url(*args, **kwargs)
 
 
 class DetailsFoodView(ListView):
@@ -56,15 +68,16 @@ class DetailsFoodView(ListView):
         return FoodPurBeurre.objects.filter(id=self.kwargs['pk'])
 
 
-class SaveFoodView(RedirectView):
-    """ Save user's favoris """
+class FavorisFoodView(ListView):
+    """ User's favoris """
+    template_name = 'purbeurre/favoris.html'
+    context_object_name = 'favoris'
 
-    url = '/purbeurre/favoris'
+    def get_queryset(self):
+        """ Return subsittute with best nutriscore and best energy for 100gr """
+        print(self.kwargs)
 
-    def get(self, request, *args, **kwargs):
-        auth_logout(request)
-
-        return super(SaveFoodView, self).get(request, *args, **kwargs)
+        return Favoris.objects.filter(id=self.kwargs['pk'])
 
 
 class UserCreateView(FormView):

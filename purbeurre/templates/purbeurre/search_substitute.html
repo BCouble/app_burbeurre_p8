@@ -11,7 +11,8 @@
                 <h6>{{ food_sub.product_name_fr }}</h6>
             {% if user.is_authenticated %}
                 <a class="btn-submit-home btn btn-primary btn-xs" href="{% url 'purbeurre:food_details' food_sub.id %}">Détails <i class="fas fa-check"></i></a>
-                <a class="btn-submit-home btn btn-primary btn-xs" href="{% url 'purbeurre:search_substitute' food_sub.id %}">Sauvegarder <i class="fas fa-check"></i></a>
+                <input type="hidden" id="id_search" name="id_search" value="{{ pk }}">
+                <a class="btn-submit-home btn btn-primary btn-xs" href="{% url 'purbeurre:save_food' food_sub.id %}">Sauvegarder <i class="fas fa-check"></i></a>
             {% endif %}
             </div>
             {% endfor %}

@@ -19,7 +19,6 @@ BASE_URL = "https://"+GEOLOC+".openfoodfacts.org/"
 # Category
 BASE_URL_S_CAT = BASE_URL+"categorie/"
 CATEGORY = "categories.json"
-CATEGORYS0 = [('viandes', 1), ('boissons', 2), ('petit-dejeuners', 3)]
 
 # Food
 CGI = "cgi/search.pl"

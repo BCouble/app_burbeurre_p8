@@ -4,7 +4,7 @@ import json
 import urllib
 from urllib import parse, error, request
 
-from purbeurre.libs.constant import FOOD, URL_LIST_FOOD, CATEGORYS0
+from purbeurre.libs.constant import FOOD, URL_LIST_FOOD
 
 
 class CreateFood:
@@ -59,21 +59,20 @@ class CreateFood:
         """ load dict with search in off """
         list_food = []
         i = 1
-        if data_food['count'] > 200:
-            while i < 199:
-                food = {"product_name_fr": "", "generic_name_fr": "", "id_s1_category": "", "stores": "", "url": "",
-                        "nutrition_grade_fr": "", "image_url": "", "energy_100g": ""}
-                for key in food:
+        while i < data_food['count']:
+            food = {"product_name_fr": "", "generic_name_fr": "", "id_s1_category": "", "stores": "", "url": "",
+                    "nutrition_grade_fr": "", "image_url": "", "energy_100g": ""}
+            for key in food:
+                try:
+                    food[key] = data_food['products'][i][key]
+                except KeyError:
+                    pass
+                if "energy_100g" in data_food['products'][i]["nutriments"]:
                     try:
-                        food[key] = data_food['products'][i][key]
+                        food["energy_100g"] = data_food['products'][i]["nutriments"]["energy_100g"]
                     except KeyError:
                         pass
-                    if "energy_100g" in data_food['products'][i]["nutriments"]:
-                        try:
-                            food["energy_100g"] = data_food['products'][i]["nutriments"]["energy_100g"]
-                        except KeyError:
-                            pass
-                list_food.append(food)
-                i += 1
+            list_food.append(food)
+            i += 1
 
         return list_food

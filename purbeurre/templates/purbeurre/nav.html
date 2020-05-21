@@ -20,7 +20,7 @@
                     <!-- if connect full nav else search inscription or connect -->
                     {% if user.is_authenticated %}
                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'purbeurre:profile' user.id %}"><i class="far fa-user fa-2x" data-toggle="tooltip" title="Mon Profile" ></i></a></li>
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#carotte"><span class="icon icon-carotte"></span></a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'purbeurre:favoris' user.id %}"><span class="icon icon-carotte"></span></a></li>
                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact"><i class="far fa-envelope fa-2x" data-toggle="tooltip" title="Contact"></i></a></li>
                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'purbeurre:user_logout' %}"><i class="fas fa-sign-out-alt fa-2x" data-toggle="tooltip" title="Déconnexion" ></i></a></li>
                         </ul>

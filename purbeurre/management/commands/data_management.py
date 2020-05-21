@@ -1,8 +1,8 @@
 from django.core.management import BaseCommand, CommandError
 from django.db import IntegrityError
 
+from purbeurre.config import CATEGORYS0
 from purbeurre.libs.category import CreateCategory
-from purbeurre.libs.constant import CATEGORYS0
 from purbeurre.libs.food import CreateFood
 from purbeurre.models import Category, FoodPurBeurre
 
