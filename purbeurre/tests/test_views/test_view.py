@@ -19,6 +19,6 @@ class IndexPageTestCase(TestCase):
         response = self.client.get(reverse('purbeurre:connect'))
         self.assertEqual(response.status_code, 200)
 
-    def test_disconnect_return_200(self):
+    def test_disconnect_return_302(self):
         response = self.client.get(reverse('purbeurre:user_logout'))
         self.assertEqual(response.status_code, 302)

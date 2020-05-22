@@ -60,7 +60,7 @@ class CreateFood:
         list_food = []
         i = 1
         while i < data_food['count']:
-            food = {"product_name_fr": "", "generic_name_fr": "", "id_s1_category": "", "stores": "", "url": "",
+            food = {"product_name_fr": "", "generic_name_fr": "", "id_s1_category": "", "store": "", "url": "",
                     "nutrition_grade_fr": "", "image_url": "", "energy_100g": ""}
             for key in food:
                 try:

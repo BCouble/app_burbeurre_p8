@@ -2,16 +2,11 @@ from django.test import TestCase, Client, RequestFactory
 from django.urls import reverse
 
 from purbeurre.models import Category, FoodPurBeurre
-from purbeurre.views import IndexView, SearchProductView
+from purbeurre.views import SearchProductView
 
 
-def create_category():
+def search_text(search_text):
     """ Create search food of purbeurre database """
-    return
-
-
-def create_food():
-    """ Create food for category """
     return
 
 
@@ -19,14 +14,18 @@ class SearchFoodPage(TestCase):
 
     def setUp(self):
         self.client = Client()
-        Category.objects.create(name='search nutella')
-        Category.objects.create(name='pizza')
+        Category.objects.create(name='ptit-dej')
+        category_s0 = Category.objects.get(name='ptit-dej')
+        Category.objects.create(name='nutella', parent=category_s0)
+        cat_nutella = Category.objects.get(name='nutella')
+        Category.objects.create(name='pizza', parent=category_s0)
+        cat_pizza = Category.objects.get(name='pizza')
         FoodPurBeurre.objects.create(
             product_name_fr='mini nutella',
             generic_name_fr='plus que mini nutella',
             nutriscore='e',
             nut_cent_gr=123,
-            category_s1='search nutella',
+            category_s1=cat_nutella,
             store='usa',
             link_off='http://nute.fr',
             link_img='http://nute.fr/mininut_img.jpeg',
@@ -36,7 +35,7 @@ class SearchFoodPage(TestCase):
             generic_name_fr='gros pot de nutella',
             nutriscore='e',
             nut_cent_gr=123,
-            category_s1='search nutella',
+            category_s1=cat_nutella,
             store='usa',
             link_off='http://nute.fr',
             link_img='http://nute.fr/bignut_img.jpeg',
@@ -46,10 +45,10 @@ class SearchFoodPage(TestCase):
             generic_name_fr='La Pizz o Choz',
             nutriscore='a',
             nut_cent_gr=345,
-            category_s1='pizza',
+            category_s1=cat_pizza,
             store='Ikea',
             link_off='http://vivelebeurre.fr',
-            link_img='http://vivelebeurre.fr/piz_choz.jpeg',
+            link_img='http://vivelebeurre.fr/bignut_img.jpeg',
         )
 
     def test_index_returns_200(self):
