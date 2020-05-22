@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 
 from purbeurre.models import Category, FoodPurBeurre
-from purbeurre.views import SearchProductView
+from purbeurre.views import SearchSubstituteView
 
 
 class SearchFoodPage(TestCase):
@@ -55,7 +55,7 @@ class SearchFoodPage(TestCase):
         """ Test view search food with request : nutella """
         data = {'search_text': 'nutella'}
         response = self.client.get('/purbeurre/search_food/', data)
-        self.assertEqual(response.resolver_match.func.__name__, SearchProductView.as_view().__name__)
+        self.assertEqual(response.resolver_match.func.__name__, SearchSubstituteView.as_view().__name__)
 
     def test_search_text_empty(self):
         """ Queryset test with empty keyword """
