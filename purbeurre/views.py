@@ -1,5 +1,5 @@
 from django.views.generic import ListView
-from django.views.generic.base import RedirectView, View
+from django.views.generic.base import RedirectView, View, TemplateView
 from django.views.generic.edit import FormView
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -134,3 +134,9 @@ class UserLogoutView(RedirectView):
         auth_logout(request)
 
         return super(UserLogoutView, self).get(request, *args, **kwargs)
+
+
+class MlView(TemplateView):
+    """ mentions légals"""
+
+    template_name = 'purbeurre/mentionslegals.html'

@@ -1,7 +1,7 @@
 from django.contrib.auth.views import LogoutView
 from django.urls import path
 from purbeurre.views import IndexView, UserCreateView, UserConnectView, UserLogoutView, SearchProductView, \
-    SearchSubstituteView, DetailsFoodView, UserProfileView, FavorisFoodView
+    SearchSubstituteView, DetailsFoodView, UserProfileView, FavorisFoodView, MlView
 from . import views
 
 
@@ -18,4 +18,5 @@ urlpatterns = [
     path('<int:pk>/food_details', DetailsFoodView.as_view(), name="food_details"),
     path('favoris/<int:pk>/', FavorisFoodView.as_view(), name="favoris"),
     path('favoris/', FavorisFoodView.as_view(), name="favoris"),
+    path('mentions-legales/', MlView.as_view(), name='legal'),
 ]
