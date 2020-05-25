@@ -51,6 +51,3 @@ class Favoris(models.Model):
     """ Save Favoris for user """
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     food = models.ForeignKey(FoodPurBeurre, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.search

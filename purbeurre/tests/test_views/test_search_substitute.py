@@ -5,7 +5,7 @@ from purbeurre.models import Category, FoodPurBeurre
 from purbeurre.views import SearchSubstituteView
 
 
-class SearchFoodPage(TestCase):
+class SearchSubstitutePage(TestCase):
 
     def setUp(self):
         self.client = Client()

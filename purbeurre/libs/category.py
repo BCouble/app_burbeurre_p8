@@ -18,11 +18,9 @@ class CreateCategory:
 
     def select_category_s0_and_search(self):
         """ retrieve sub-category """
-        id_s0 = 1
         for row in self.category:
             sub_cat = self.search_s1_category(row[0])
-            self.append_dict_sub_category(sub_cat, id_s0)
-            id_s0 += 1
+            self.append_dict_sub_category(sub_cat, row[1])
 
         return self.s1category
 

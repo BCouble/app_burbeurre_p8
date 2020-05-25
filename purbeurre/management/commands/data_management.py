@@ -55,7 +55,7 @@ class Command(BaseCommand):
         for row in food_list:
             try:
                 if len(row['nutrition_grade_fr']) > 0:
-                    FoodPurBeurre.objects.create(
+                    food = FoodPurBeurre.objects.create(
                         product_name_fr=row['product_name_fr'],
                         generic_name_fr=row['generic_name_fr'],
                         nutriscore=row['nutrition_grade_fr'],
@@ -65,12 +65,13 @@ class Command(BaseCommand):
                         link_off=row['url'],
                         link_img=row['image_url'],
                     )
+                    food.save()
             except KeyError as e:
                 print("key error : " + e)
             except IntegrityError:
-                print("integrity error : " + e)
+                pass
             except ValueError:
-                print("value error : " + e)
+                pass
 
     def handle(self, *args, **options):
         self.create_category_s0()

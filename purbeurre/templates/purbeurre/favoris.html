@@ -1,10 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "index.html" %}
+{% block header %}
+<section class="page-section">
+    <div class="container">
+        {% if message %}
+        <div class="alert alert-warning">{{ message }}</div>
+        {% endif %}
+        {% if favoris|length != 0 %}
+        <div class="alert alert-primary">Nous avons trouvé : {{ favoris|length }} produit(s) enregistré dans vos favoris !</div>
+        {% endif %}
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <span class="step-links">
+                    <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+                    {% endif %}
+                    <li class="page-item">
+                    <span class="current page-link">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                    </li>
+                    {% if page_obj.has_next %}
+                        <a class="page-item page-link" href="?page={{ page_obj.next_page_number }}">next</a>
+                        <a class="page-item page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                    </ul>
+                </span>
+            </div>
+        </div>
+        {% if favoris %}
+        <div class="row">
+        {% for item in favoris %}
+            <div class="col-lg-4 col-sm-6">
+                <h6 class="mt-4 text-truncate">{{ item.food.product_name_fr }}</h6>
+                {% if item.food.link_img|length != 0 %}
+                    <div class="food_img" style="background-image: url({{ item.food.link_img }})"></div>
+                {% else %}
+                    <div class="food_img" style="background-image: url('static/assets/img/logo_pur_beurre.png')"></div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+        <div class="mt-4 row">
+            <div class="col-lg-12 col-sm-12">
+                <span class="step-links">
+                    <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+                    {% endif %}
+                    <li class="page-item">
+                    <span class="current page-link">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                    </li>
+                    {% if page_obj.has_next %}
+                        <a class="page-item page-link" href="?page={{ page_obj.next_page_number }}">next</a>
+                        <a class="page-item page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                    </ul>
+                </span>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

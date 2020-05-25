@@ -2,20 +2,18 @@
 {% block header %}
 <section class="page-section">
     <div class="container">
+        <div class="alert alert-primary">Nous avons trouvé : {{ search_substitute|length }} substitut(s) en rapport avec votre sélection !</div>
     {% if search_substitute %}
         <div class="row">
-            {% for food_sub in search_substitute|make_list %}
-            {% if forloop.counter == 1 %}
-                <p>Nous n'avons pas trouvé de substitus !</p>
-            {% endif %}
+            {% for food_sub in search_substitute %}
             <div class="col-lg-4 col-sm-6">
-                <span class="food-nutriscore badge badge-{{ food_sub.nutriscore }}">{{ food_sub.nutriscore }}</span>
+                <span class="food-nutriscore badge food-card-badge food-nut-{{ food_sub.nutriscore }} badge-{{ food_sub.nutriscore }}">{{ food_sub.nutriscore }}</span>
                 <div class="food_img" style="background-image: url({{ food_sub.link_img }})"></div>
-                <h6>{{ food_sub.product_name_fr }}</h6>
+                <h6 class="mb-1 text-truncate">{{ food_sub.product_name_fr }}</h6>
             {% if user.is_authenticated %}
-                <a class="btn-submit-home btn btn-primary btn-xs" href="{% url 'purbeurre:food_details' food_sub.id %}">Détails <i class="fas fa-check"></i></a>
+                <a class="mb-4 btn-submit-home btn btn-primary btn-xs" href="{% url 'purbeurre:food_details' food_sub.id %}">Détails</a>
                 <input type="hidden" id="id_search" name="id_search" value="{{ pk }}">
-                <a class="btn-submit-home btn btn-primary btn-xs" href="{% url 'purbeurre:save_food' food_sub.id %}">Sauvegarder <i class="fas fa-check"></i></a>
+                <a class="mb-4 btn-submit-home btn btn-primary btn-xs" href="{% url 'purbeurre:favoris' food_sub.id %}">Sauvegarder</a>
             {% endif %}
             </div>
             {% endfor %}

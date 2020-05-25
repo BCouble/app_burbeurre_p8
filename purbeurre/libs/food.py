@@ -8,21 +8,6 @@ from purbeurre.libs.constant import FOOD, URL_LIST_FOOD
 
 
 class CreateFood:
-    def __init__(self):
-        self.all_category = []
-        self.search_result = []
-        self.food = []
-        self.nb_category = int()
-        self.foods = []
-
-    def categories(self, load_cat):
-        """ load categories """
-        category = 0
-        for row in load_cat:
-            food_of_categories = self.search_food(row)
-            category += 1
-            self.insert_data_in_dict(food_of_categories, category)
-
     def search_food(self, search_term):
         """ search in openfoodfact """
 
@@ -58,8 +43,12 @@ class CreateFood:
     def insert_data_in_dict(self, data_food):
         """ load dict with search in off """
         list_food = []
-        i = 1
-        while i < data_food['count']:
+        i = 0
+        if int(data_food['count']) < 200:
+            count = int(data_food['count'])
+        else:
+            count = 200
+        while i < count:
             food = {"product_name_fr": "", "generic_name_fr": "", "id_s1_category": "", "store": "", "url": "",
                     "nutrition_grade_fr": "", "image_url": "", "energy_100g": ""}
             for key in food:

@@ -3,28 +3,31 @@
 <section class="page-section">
 <div class="container">
 <!-- test SearchProductsView ListView ou DetailView -->
+{% if search_foods|length != 0 %}
+    <div class="alert alert-primary">Nous avons trouvé : {{ search_foods|length }} produit(s) par rapport à votre recherche !</div>
+{% endif %}
 {% if search_foods %}
     <div class="row">
     {% for food in search_foods %}
         <div class="col-lg-4 col-sm-6">
-            <h6>{{ food.product_name_fr }}</h6>
-            <div class="food_img" style="background-image: url({{ food.link_img }})"></div>
-            <!-- Pourquoi pas category_s1 -->
-            <a class="btn-submit-home btn btn-primary btn-xs" href="{% url 'purbeurre:search_substitute' food.id %}">Chercher un substitut <i class="fas fa-check"></i></a>
+            <h6 class="mt-4 text-truncate">{{ food.product_name_fr }}</h6>
+            {% if food.link_img|length != 0 %}
+                <div class="food_img" style="background-image: url({{ food.link_img }})"></div>
+            {% else %}
+                <div class="food_img" style="background-image: url('static/assets/img/logo_pur_beurre.png')"></div>
+            {% endif %}
+            <a class="mt-1 btn-submit-home btn btn-primary btn-xs btn-block" href="{% url 'purbeurre:search_substitute' food.id %}">Chercher un substitut</a>
         </div>
         {% if forloop.last %}
-
         {% else %}
             <div class="col-lg-offset-3"></div>
         {% endif %}
     {% endfor %}
     </div>
 {% else %}
-    <div class="row">
-        <div class="col-lg-4 col-sm-6">
-            <h6>Nous n'avons pas trouvé de produit correspondant à votre recherche !</h6>
-            <a class="btn-submit-home btn btn-primary btn-xs" href="{% url 'purbeurre:index' %}">Retourner à l'accueil<i class="fas fa-check"></i></a>
-        </div>
+    <div class="alert alert-warning">Nous n'avons pas trouvé de produit par rapport à vôtre recherche !</div>
+    <div class="col-lg-10 col-sm-10">
+    <a class="btn-submit-home btn btn-primary btn-xs" href="{% url 'purbeurre:index' %}">Retourner à l'accueil<i class="fas fa-check"></i></a>
     </div>
 {% endif %}
 </div>

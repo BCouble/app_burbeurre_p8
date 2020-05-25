@@ -47,7 +47,7 @@ class SearchFoodPage(TestCase):
         )
 
     def test_index_returns_200(self):
-        """ Test statut code IndexView"""
+        """ Test statut code search food """
         response = self.client.get(reverse('purbeurre:search_food'), {'search_text': 'nutella'})
         self.assertEqual(response.status_code, 200)
 

@@ -16,14 +16,22 @@
 <section class="page-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-sm-10">
-                <div>{{ row.nutriscore }}</div>
+            <div class="col-lg-6 col-sm-6">
+                <h6>Nutriscore</h6>
+                <ul class="nutriscrore-puce">
+                {% for item in nutriscore %}
+                <li class="{% if item == row.nutriscore %}food-nutriscore{% else %}food-nutriscore-small{% endif %} badge food-nut-{{ item }} badge-{{ item }}" style="diplay:inline">{{ item }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                <h6>Repaire nutritionnels pour 100gr</h6>
                 <div>{{ row.nut_cent_gr }}</div>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-10 col-sm-10">
-                <div>{{ row.link_off }}</div>
+            <div class="col-lg-12 col-sm-12">
+                <a class="btn btn-outline-primary btn-block" href="{{ row.link_off }}">Voir la fiche d'OpenFoodFact</a>
             </div>
         </div>
     </div>

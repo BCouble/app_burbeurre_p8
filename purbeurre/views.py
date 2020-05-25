@@ -45,19 +45,6 @@ class SearchSubstituteView(ListView):
         return FoodPurBeurre.objects.all().filter(category_s1=category[0]['category_s1_id']).order_by('nutriscore')[:6]
 
 
-class SaveFoodView(RedirectView):
-    permanent = False
-    query_string = True
-    pattern_name = 'article-detail'
-
-    def get_redirect_url(self, *args, **kwargs):
-        print(self.kwargs)
-        print(login)
-        favoris = Favoris(user=self.__setattr__('_auth_user_id'), food=self.kwargs['pk'])
-
-        return super(favoris.save()).get_redirect_url(*args, **kwargs)
-
-
 class DetailsFoodView(ListView):
     template_name = 'purbeurre/food_details.html'
     context_object_name = 'food_details'
@@ -67,17 +54,37 @@ class DetailsFoodView(ListView):
 
         return FoodPurBeurre.objects.filter(id=self.kwargs['pk'])
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['nutriscore'] = ['a', 'b', 'c', 'd', 'e']
+        return context
+
 
 class FavorisFoodView(ListView):
     """ User's favoris """
+    paginate_by = 6
     template_name = 'purbeurre/favoris.html'
     context_object_name = 'favoris'
 
+    def get_context_data(self, *args, **kwargs):
+        """ Add message """
+        context = super().get_context_data(**kwargs)
+        if self.kwargs:
+            food = FoodPurBeurre.objects.get(id=self.kwargs['pk'])
+            if Favoris.objects.filter(user=self.request.user, food=food).count() < 1:
+                favoris = Favoris.objects.create(user=self.request.user, food=food)
+                favoris.save()
+                context['message'] = 'Vous venez de sauvegarder un aliment'
+            else:
+                context['message'] = 'Vous avez déjà sauvegardé l\'aliment'
+            context['favoris'] = self.favoris
+        return context
+
     def get_queryset(self):
         """ Return subsittute with best nutriscore and best energy for 100gr """
-        print(self.kwargs)
+        self.favoris = Favoris.objects.filter(user=self.request.user)
 
-        return Favoris.objects.filter(id=self.kwargs['pk'])
+        return self.favoris
 
 
 class UserCreateView(FormView):

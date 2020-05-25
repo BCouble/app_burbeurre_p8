@@ -1,10 +1,8 @@
 {% extends "index.html" %}
 {% block header %}
 <!-- Masthead-->
-<header class="masthead">
+<header class="page-section pt-6">
 <div class="container h-100">
-
-<h1>Se connecter</h1>
 
 {% if error %}
 <p><strong>Utilisateur inconnu ou mauvais de mot de passe.</strong></p>
@@ -13,11 +11,19 @@
 {% if user.is_authenticated %}
 Vous êtes connecté, {{ user.username }} !
 {% else %}
-<form method="post" action=".">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Se connecter" />
-</form>
+    <div class="row">
+        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4 border border-primary">
+            <h4 class="text-primary">Connectez-vous !</h4>
+            <form method="post" action=".">
+                <div class="form-group">
+                {% csrf_token %}
+                {{ form.username }}
+                {{ form.password }}
+                <input class="mt-4 btn-submit-home btn btn-primary btn-sx" type="submit" value="Se connecter" />
+                </div>
+            </form>
+        </div>
+    </div>
 {% endif %}
 
 </div></header>{% endblock %}

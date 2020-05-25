@@ -1,24 +1,26 @@
 {% extends "index.html" %}
 {% block header %}
 <!-- Masthead-->
-<header class="masthead">
-<div class="container h-100">
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-    {% endfor %}
-    <button type="submit">Sign up</button>
-  </form>
-</div></header>
+<header class="page-section pt-6">
+    <div class="container h-100">
+        <div class="row">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4 border border-primary">
+                <h4 class="text-primary">Inscription</h4>
+                <form method="post">
+                    <div class="form-group">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {% for item in form %}
+                    {% for error in item.errors %}
+                        <div class="mt-4 alert alert-primary">{{ error|escape }}</div>
+                    {% endfor %}
+                    {{ item }}
+                    {% endfor %}
+                        <input class="mt-4 btn-submit-home btn btn-primary btn-sx btn-block" type="submit" value="Se connecter" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
 {% endblock %}

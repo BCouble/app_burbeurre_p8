@@ -1,6 +1,5 @@
 from django.test import TestCase, Client
 from purbeurre.models import CustomUser
-from purbeurre.forms import CustomUserConnectForm
 from django.urls import reverse
 
 
