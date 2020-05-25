@@ -37,8 +37,9 @@
                 {% if item.food.link_img|length != 0 %}
                     <div class="food_img" style="background-image: url({{ item.food.link_img }})"></div>
                 {% else %}
-                    <div class="food_img" style="background-image: url('static/assets/img/logo_pur_beurre.png')"></div>
+                    <div class="food_img bg-img-notfound"></div>
                 {% endif %}
+                <a class="mt-4 btn-submit-home btn btn-primary btn-xs btn-block" href="{% url 'purbeurre:food_details' item.food.id %}">Détails</a>
             </div>
         {% endfor %}
         </div>
