@@ -132,10 +132,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_FILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
-
 AUTH_USER_MODEL = 'purbeurre.CustomUser'
 
 if os.environ.get('ENV') == 'PRODUCTION':
@@ -144,6 +140,7 @@ if os.environ.get('ENV') == 'PRODUCTION':
     PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
     STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+    STATIC_URL = '/static/'
 
     # Extra places for collectstatic to find static files.
     STATICFILES_DIRS = (
