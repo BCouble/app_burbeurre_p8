@@ -1,10 +1,8 @@
-from purbeurre.libs.category import CreateCategory
-import openfoodfacts
 import json
 import urllib
 from urllib import parse, error, request
 
-from purbeurre.libs.constant import FOOD, URL_LIST_FOOD
+from purbeurre.libs.constant import URL_LIST_FOOD
 
 
 class CreateFood:
