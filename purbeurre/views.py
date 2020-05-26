@@ -90,7 +90,7 @@ class FavorisFoodView(ListView):
 class UserCreateView(FormView):
     template_name = 'purbeurre/signup.html'
     form_class = CustomUserCreationForm
-    success_url = '/purbeurre/signup'
+    success_url = '/connect/'
 
     def form_valid(self, form):
         form.save()
