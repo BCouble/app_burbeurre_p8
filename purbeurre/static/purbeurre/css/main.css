@@ -71,16 +71,16 @@
   background-size: cover;
 }
 .icon-carotte {
-  background-image: url("../assets/img/carotte.png");
+  background-image: url("../images/carotte.png");
 }
 .icon-carotte:hover,
 .icon-carotte:focus {
-  background-image: url("../assets/img/carotte_hover.png");
+  background-image: url("../images/carotte_hover.png");
 }
 header.smallheader {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 56px);
-  background-image: url("../assets/img/bg-masthead.png");
+  background-image: url("../images/bg-masthead.png");
   background-position: center center;
   background-size: cover;
   height: 300px;
@@ -108,5 +108,5 @@ header.smallheader {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .bg-img-notfound{
-    background-image: url('../assets/img/img_404.gif');
+    background-image: url('../images/img_404.gif');
 }
