@@ -105,7 +105,7 @@ class UserCreateView(FormView):
 class UserConnectView(FormView):
     template_name = 'purbeurre/connect.html'
     form_class = CustomUserConnectForm
-    success_url = '/purbeurre/'
+    success_url = '/'
     redirect_field_name = REDIRECT_FIELD_NAME
 
     def form_valid(self, form):
@@ -128,7 +128,7 @@ class UserProfileView(LoginRequiredMixin, ListView):
 class UserLogoutView(RedirectView):
     """ Deconnect Custom User """
 
-    url = '/purbeurre/'
+    url = '/'
 
     def get(self, request, *args, **kwargs):
         auth_logout(request)
@@ -139,4 +139,4 @@ class UserLogoutView(RedirectView):
 class MlView(TemplateView):
     """ mentions légals"""
 
-    template_name = 'purbeurre/mentionslegals.html'
+    template_name = 'mentionslegals.html'

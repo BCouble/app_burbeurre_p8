@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('purbeurre/', include('purbeurre.urls')),
+    path('', include('purbeurre.urls')),
     path('admin/', admin.site.urls),
 ]
 
