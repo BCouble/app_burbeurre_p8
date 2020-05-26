@@ -70,6 +70,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, "templates"),
             os.path.join(BASE_DIR, 'purbeurre/templates/purbeurre'),
+            os.path.join(BASE_DIR, 'purbeurre/static/purbeurre'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
