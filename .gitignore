@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 .idea
-
+staticfiles/
 # Distribution / packaging
 .Python
 build/

@@ -53,14 +53,13 @@ class SearchFoodPage(TestCase):
 
     def test_view_with_resolver_match(self):
         """ Test view search food with request : nutella """
-        data = {'search_text': 'nutella'}
-        response = self.client.get('/purbeurre/search_food/', data)
+        response = self.client.get(reverse('purbeurre:search_food'), {'search_text': 'nutella'})
         self.assertEqual(response.resolver_match.func.__name__, SearchProductView.as_view().__name__)
 
     def test_search_text_empty(self):
         """ Queryset test with empty keyword """
         response = self.client.get(reverse('purbeurre:search_food'), {'search_text': ''})
-        self.assertContains(response, "Nous n\'avons pas trouvé de produit correspondant à votre recherche !")
+        self.assertContains(response, "Nous n'avons pas trouvé de produit par rapport à vôtre recherche !")
         self.assertQuerysetEqual(response.context['search_foods'], [])
 
     def test_search_text_one_key(self):

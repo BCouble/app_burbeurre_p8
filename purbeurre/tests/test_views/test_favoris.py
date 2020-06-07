@@ -7,7 +7,6 @@ from purbeurre.views import FavorisFoodView
 
 
 class FavorisFoodPage(TestCase):
-
     def setUp(self):
         self.client = Client()
         CustomUser.objects.create_user(username='babatest', password='123AZEr!', email='baba.test@django.me')
@@ -35,17 +34,7 @@ class FavorisFoodPage(TestCase):
         self.pk = query.id
         Favoris.objects.create(user=self.auth_user, food=query)
 
-    def test_index_returns_200(self):
-        """ Test statut code favoris """
-        response = self.client.get(reverse('purbeurre:favoris'))
-        self.assertEqual(response.status_code, 200)
-
-    def test_view_with_resolver_match(self):
-        """ Test view favoris food with request """
-        response = self.client.get(reverse('purbeurre:favoris'))
-        self.assertEqual(response.resolver_match.func.__name__, FavorisFoodView.as_view().__name__)
-
-    def test_save_food_return_302(self):
+    def test_return_favoris_of_user(self):
         """ Test save favoris and redirect View """
         query = Favoris.objects.get(user=self.auth_user)
         self.assertEqual(query.food.product_name_fr, 'mini nutella')

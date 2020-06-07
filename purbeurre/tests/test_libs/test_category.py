@@ -2,16 +2,13 @@ from unittest.mock import Mock
 
 from django.test import TestCase
 
-from purbeurre.config import CATEGORYS0, CATEGORYS1_P_DEJ, CATEGORYS1_BOI, CATEGORYS1_VIA
+from purbeurre.config import CATEGORYS0, CATEGORYS1_P_DEJ, CATEGORYS1_VIA
 from purbeurre.libs.category import CreateCategory
-from purbeurre.libs.constant import NB_S_CAT
 
 
 class ManageCategoryAPI(TestCase):
     """ Contains management for importing categories """
-    def setUp(self) :
-        self.category = CATEGORYS0
-        self.response_categorys1 = CATEGORYS1_P_DEJ
+    def setUp(self):
         self.create_category = CreateCategory()
         self.create_category.search_s1_category = Mock(return_value=CATEGORYS1_VIA)
         self.return_api_category = self.create_category.search_s1_category('viandes')

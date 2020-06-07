@@ -15,4 +15,4 @@ class LoginViewTest(TestCase):
                                         'username': 'babatest',
                                         'password': '123AZEr!'
                                     })
-        self.assertEqual(response.url, '/purbeurre/')
+        self.assertEqual(response.url, '/')

@@ -30,19 +30,19 @@ class ManageCategoryAPI(TestCase):
 
     def test_dat_first_line_product_name_fr(self):
         """ test data on the first product : product_name_fr """
-        self.assertEqual(self.return_dict_food[0]['product_name_fr'], '4 steack hachés pur boeuf')
+        self.assertEqual(self.return_dict_food[0]['product_name_fr'], 'Steacks hachés Pur Boeuf')
 
     def test_dat_first_line_generic_name_fr(self):
         """ test data on the first product : generic_name_fr """
-        self.assertEqual(self.return_dict_food[0]['generic_name_fr'], '')
+        self.assertEqual(self.return_dict_food[0]['generic_name_fr'], 'Steaks hachés')
 
     def test_dat_first_line_stores(self):
         """ test data on the first product : stores """
-        self.assertEqual(self.return_dict_food[0]['stores'], 'Leclerc')
+        self.assertEqual(self.return_dict_food[0]['store'], '')
 
     def test_dat_first_line_url(self):
         """ test data on the first product : url """
-        self.assertEqual(self.return_dict_food[0]['url'], "https://fr.openfoodfacts.org/produit/3661112092085/4-steack-haches-pur-boeuf-ferial")
+        self.assertEqual(self.return_dict_food[0]['url'], "https://fr.openfoodfacts.org/produit/3270190020578/steacks-haches-pur-boeuf-carrefour")
 
     def test_dat_first_line_nutrition_grade_fr(self):
         """ test data on the first product : nutrition_grade_fr """
@@ -50,7 +50,7 @@ class ManageCategoryAPI(TestCase):
 
     def test_dat_first_line_image_url(self):
         """ test data on the first product : image_url """
-        self.assertEqual(self.return_dict_food[0]['image_url'], 'https://static.openfoodfacts.org/images/products/366/111/209/2085/front_fr.12.400.jpg')
+        self.assertEqual(self.return_dict_food[0]['image_url'], 'https://static.openfoodfacts.org/images/products/327/019/002/0578/front_fr.26.400.jpg')
 
     def test_dat_first_line_energy_100g(self):
         """ test data on the first product : energy_100g """

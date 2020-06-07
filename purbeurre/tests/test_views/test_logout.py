@@ -16,4 +16,4 @@ class LogoutViewTest(TestCase):
                              'password': '123AZEr!'
                          })
         response = self.client.get(reverse('purbeurre:user_logout'))
-        self.assertEqual(response.url, '/purbeurre/')
+        self.assertEqual(response.url, '/')

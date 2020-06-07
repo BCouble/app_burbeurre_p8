@@ -25,12 +25,12 @@ class CustomUserModelTestCase(TestCase):
 
     def test_label_and_result_username(self):
         """ test field username label and result """
-        self.assertEqual(self.custom_user['username_label'], 'username')
+        self.assertEqual(self.custom_user['username_label'], 'nom d’utilisateur')
         self.assertEqual(self.custom_user['username'], 'babcool')
 
     def test_label_and_result_email(self):
         """ test field email label and result """
-        self.assertEqual(self.custom_user['email_label'], 'email address')
+        self.assertEqual(self.custom_user['email_label'], 'adresse électronique')
         self.assertEqual(self.custom_user['email'], 'bab.cool@test.com')
 
     def test_label_and_result_background(self):

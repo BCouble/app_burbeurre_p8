@@ -83,7 +83,7 @@ class SearchSubstitutePage(TestCase):
     def test_search_zero_result(self):
         """ Queryset test with one response """
         response = self.client.get(reverse('purbeurre:search_substitute', args=(self.pk2,)))
-        self.assertContains(response, "Nous n'avons pas trouvé de substitus !")
+        self.assertContains(response, "Nous avons trouvé : 1 substitut(s) en rapport avec votre sélection !")
         self.assertQuerysetEqual(response.context['search_substitute'], ['<FoodPurBeurre: pizza chorizo>'])
 
     def test_search_text_one_key(self):

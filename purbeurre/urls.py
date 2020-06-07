@@ -1,8 +1,7 @@
-from django.contrib.auth.views import LogoutView
+
 from django.urls import path
 from purbeurre.views import IndexView, UserCreateView, UserConnectView, UserLogoutView, SearchProductView, \
     SearchSubstituteView, DetailsFoodView, UserProfileView, FavorisFoodView, MlView
-from . import views
 
 
 app_name = 'purbeurre'

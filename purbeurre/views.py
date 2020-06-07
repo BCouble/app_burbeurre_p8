@@ -103,6 +103,7 @@ class UserCreateView(FormView):
 
 
 class UserConnectView(FormView):
+    """ Connect user """
     template_name = 'purbeurre/connect.html'
     form_class = CustomUserConnectForm
     success_url = '/'

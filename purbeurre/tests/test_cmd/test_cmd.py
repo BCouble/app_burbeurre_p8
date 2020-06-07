@@ -47,7 +47,7 @@ class InsertDataWithCommand(TestCase):
         ss_cat = Category.objects.get(name='steack')
         self.command.insert_food(self.return_dict_food, ss_cat)
         response = FoodPurBeurre.objects.get(id=1)
-        self.assertEqual(response.product_name_fr, '4 steack hachés pur boeuf')
+        self.assertEqual(response.product_name_fr, 'Steacks hachés Pur Boeuf')
 
 
 
