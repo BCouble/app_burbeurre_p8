@@ -1,8 +1,9 @@
 {% extends "index.html" %}
+{% load static %}
 {% block header %}
 {% if profile %}
 {% for row in profile %}
-<header class="smallheader text-center text-white d-flex" style="background-image: url({% static bg-profile{{ row.background }}.jpg %}) !important;">
+<header class="smallheader text-center text-white d-flex" style="background-image: url({% static 'purbeurre/images/bg_profile{{ row.background }}.jpg' %}) !important;">
     <div class="container h-100">
         <div class="row">
             <div class="col-lg-10 mx-auto">
