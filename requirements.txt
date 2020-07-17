@@ -4,7 +4,7 @@ chardet==3.0.4
 coverage==5.0a4
 dj-database-url==0.5.0
 Django==2.0.13
-django-debug-toolbar==2.2
+django-debug-toolbar==2.0a1
 django-heroku==0.3.1
 gunicorn==20.0.4
 idna==2.9
