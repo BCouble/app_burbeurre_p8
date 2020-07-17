@@ -1,17 +1,6 @@
 language: python
 # Run these python versions:
-python: ["3.4", "3.5", "3.6", "pypy"]
-
-# Also run these python versions with a specific distribution:
-matrix:
-  include:
-    - python: 3.2
-      dist: trusty
-    - python: 3.3
-      dist: trusty
-    - python: 3.7
-      dist: xenial
-      sudo: true
+python: ["3.4"]
 
 before_script:
   - pip install -r requirements.txt
