@@ -1,6 +1,6 @@
 language: python
 # Run these python versions:
-python: ["2.7", "3.4", "3.5", "3.6", "pypy"]
+python: ["3.4", "3.5", "3.6", "pypy"]
 
 # Also run these python versions with a specific distribution:
 matrix:
